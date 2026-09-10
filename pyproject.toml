@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rpcprobe"
+version = "0.1.0"
+description = "which public ethereum json-rpc endpoints answer, and what they let you do: log ranges, archive state, batches, fee history, blob fee, eth_config, cors. no keys."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Alina Schanz" }]
+keywords = ["ethereum", "json-rpc", "rpc", "public-rpc", "dataset", "cli"]
+classifiers = [
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/alinaschanz/rpcprobe"
+Author = "https://alinaschanz.life"
+Issues = "https://github.com/alinaschanz/rpcprobe/issues"
+Changelog = "https://github.com/alinaschanz/rpcprobe/blob/main/CHANGELOG.md"
+
+[project.scripts]
+rpcprobe = "rpcprobe.cli:main"
+
+[tool.setuptools]
+packages = ["rpcprobe"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
