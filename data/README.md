@@ -16,5 +16,6 @@ written by the [daily workflow](../.github/workflows/daily.yml) at 00:53 utc, fr
 - `blob_base_fee`, `eth_config`: 1 when those methods answered
 - `browser`: 1 when the answer allows any origin (`access-control-allow-origin`), so a web page can use it
 - `client`: from `web3_clientVersion`, shortened; some gateways report a made-up one
+- `block_receipts`: 1 when `eth_getBlockReceipts` returned the receipts of a recent block (from 2026-09-10 on)
 
 a rerun for the same day replaces that day's rows. columns are only ever appended.

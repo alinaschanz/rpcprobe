@@ -15,7 +15,7 @@ from .endpoints import ENDPOINTS, pick
 from .probe import LOG_SPANS, OLD_BLOCK, Result, measure_lag, probe
 
 SUMMARY_FIELDS = ("date_utc", "endpoint", "url", "ok", "error", "latency_ms", "lag", "logs_range", "archive", "batch",
-                  "fee_history", "blob_base_fee", "eth_config", "browser", "client")
+                  "fee_history", "blob_base_fee", "eth_config", "browser", "client", "block_receipts")
 
 
 def yes(flag: bool) -> str:
@@ -26,7 +26,8 @@ def summary_rows(date_utc: str, results: list[Result]) -> list[dict]:
     return [{"date_utc": date_utc, "endpoint": r.name, "url": r.url, "ok": int(r.ok), "error": r.error or "",
              "latency_ms": f"{r.latency_ms:.0f}" if r.latency_ms is not None else "", "lag": "" if r.lag is None else r.lag,
              "logs_range": r.logs_range, "archive": int(r.archive), "batch": int(r.batch), "fee_history": r.fee_history,
-             "blob_base_fee": int(r.blob_base_fee), "eth_config": int(r.eth_config), "browser": int(r.browser), "client": r.client or ""}
+             "blob_base_fee": int(r.blob_base_fee), "eth_config": int(r.eth_config), "browser": int(r.browser), "client": r.client or "",
+             "block_receipts": int(r.receipts)}
             for r in results]
 
 
@@ -52,20 +53,22 @@ def table(results: list[Result], when: datetime) -> str:
     lines = [f"public ethereum rpcs, checked {when:%Y-%m-%d %H:%M} utc from this machine: {len(good)} of {len(results)} answer"
              + (f", head {head:,}" if head else ""), ""]
     if good:
-        lines.append(f"{'endpoint':<12} {'p50 ms':>6} {'lag':>4} {'logs':>7} {'archive':>7} {'batch':>5} {'fee hist':>8} "
-                     f"{'blob fee':>8} {'eth_config':>10} {'browser':>7}  client")
+        lines.append(f"{'endpoint':<12} {'p50 ms':>6} {'lag':>4} {'logs':>7} {'archive':>7} {'batch':>5} {'receipts':>8} "
+                     f"{'fee hist':>8} {'blob fee':>8} {'eth_config':>10} {'browser':>7}  client")
         for r in good:
             lag = "?" if r.lag is None else str(r.lag)
             logs = f"{r.logs_range:,}" if r.logs_range else "-"
             cells = (f"{r.name[:12]:<12} {r.latency_ms:>6.0f} {lag:>4} {logs:>7} {yes(r.archive):>7} {yes(r.batch):>5} "
-                     f"{r.fee_history or '-':>8} {yes(r.blob_base_fee):>8} {yes(r.eth_config):>10} {yes(r.browser):>7}")
+                     f"{yes(r.receipts):>8} {r.fee_history or '-':>8} {yes(r.blob_base_fee):>8} "
+                     f"{yes(r.eth_config):>10} {yes(r.browser):>7}")
             lines.append(f"{cells}  {r.client or ''}".rstrip())
     if bad:
         lines += ["", "no answer, or not without an account:"]
         lines += [f"  {r.name:<12} {r.error}" for r in bad]
     lines += ["", "p50: median of five eth_blockNumber round trips from here. lag: blocks behind the highest head, read at one moment.",
               f"logs: the widest range of blocks answered for one address and one event (tried {', '.join(f'{s:,}' for s in LOG_SPANS)}).",
-              f"archive: an address's balance at block {OLD_BLOCK:,}. browser: the answer carries access-control-allow-origin."]
+              f"archive: an address's balance at block {OLD_BLOCK:,}. receipts: eth_getBlockReceipts for one block.",
+              "browser: the answer carries access-control-allow-origin."]
     return "\n".join(lines)
 
 

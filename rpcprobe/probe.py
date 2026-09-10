@@ -50,6 +50,8 @@ class Result:
     archive: bool = False
     archive_refusal: str | None = None
     batch: bool = False
+    receipts: bool = False
+    receipts_refusal: str | None = None
     fee_history: int = 0
     blob_base_fee: bool = False
     eth_config: bool = False
@@ -165,6 +167,11 @@ def probe(name: str, url: str, timeout: float = 15.0) -> Result:
     r.archive = not a.error and isinstance(a.body, str) and int(a.body, 16) > 0
     if not r.archive:
         r.archive_refusal = a.error or "a zero balance, which is wrong"
+
+    a = call(url, "eth_getBlockReceipts", [hex(to_block)], timeout)  # every receipt of one block in a single call
+    r.receipts = not a.error and isinstance(a.body, list) and len(a.body) > 0
+    if not r.receipts:
+        r.receipts_refusal = a.error or "no receipts in the answer"
 
     a = post(url, [{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []},
                    {"jsonrpc": "2.0", "id": 2, "method": "eth_chainId", "params": []}], timeout)

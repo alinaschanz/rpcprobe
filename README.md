@@ -14,27 +14,27 @@ fills itself every night.
 
 ```
 $ rpcprobe
-public ethereum rpcs, checked 2026-09-10 13:52 utc from this machine: 12 of 21 answer, head 25,947,413
+public ethereum rpcs, checked 2026-09-10 14:21 utc from this machine: 14 of 21 answer, head 25,947,555
 
-endpoint     p50 ms  lag    logs archive batch fee hist blob fee eth_config browser  client
-publicnode      228    0      50      no   yes     1024      yes        yes     yes  geth 1.17.1
-tenderly-gw     239    0  10,000     yes   yes     1024      yes         no     yes  tenderly 1.0
-tenderly        239    0  10,000     yes   yes     1024      yes         no     yes  tenderly 1.0
-drpc            256    0  10,000     yes   yes     1024       no         no     yes  geth 10.0.0
-nodies          281    0      50     yes   yes     1024      yes        yes     yes  reth 2.4.1
-blastapi        315    0      10     yes   yes     1024       no         no     yes  reth 2.4.0
-blockrazor      316    0      10      no   yes     1024      yes        yes     yes  geth 1.17.5
-mevblocker      347    0  10,000     yes   yes     1024      yes         no     yes  mevblocker
-1rpc            392    1       -      no   yes        -       no         no     yes
-flashbots       557    0  10,000      no   yes     1024      yes         no     yes  reth 1.11.2
-zan             646    0       -      no   yes     1024      yes         no     yes  geth 1.17.5
-meowrpc        1027    0       -      no    no        -      yes         no     yes
+endpoint     p50 ms  lag    logs archive batch receipts fee hist blob fee eth_config browser  client
+tenderly-gw     238    1  10,000     yes   yes      yes     1024      yes         no     yes  tenderly 1.0
+nownodes        246    0      10      no   yes      yes     1024      yes        yes     yes  geth 1.17.5
+publicnode      246    0      50      no   yes      yes     1024      yes        yes     yes  geth 1.17.1
+tenderly        250    1  10,000     yes   yes      yes     1024      yes         no     yes  tenderly 1.0
+drpc            253    0  10,000     yes   yes      yes     1024       no         no     yes  geth 10.0.0
+nodies          273    1      50     yes   yes      yes     1024      yes        yes     yes  reth 2.4.1
+blockrazor      311    0      10      no   yes      yes     1024      yes        yes     yes  geth 1.17.5
+blastapi        343    0      10     yes   yes       no     1024       no         no     yes  reth 2.4.0
+mevblocker      348    0  10,000     yes   yes      yes     1024      yes         no     yes  mevblocker
+merkle          358    ?       -      no    no       no        -       no         no     yes
+zan             361    0       -      no   yes       no     1024      yes         no     yes  geth 1.17.5
+1rpc            370    1       -      no   yes       no        1      yes        yes     yes  geth 1.16.7
+meowrpc         401    0       -      no    no      yes     1024       no         no     yes
+flashbots       550    0  10,000      no   yes      yes     1024      yes         no     yes  reth 1.11.2
 
 no answer, or not without an account:
-  nownodes     connection reset
   onfinality   http 429
   blockpi      http 521
-  merkle       http 429
   cloudflare   Cannot fulfill request
   llamarpc     http 525
   ankr         Unauthorized: You must authenticate your request with an API key.
@@ -43,14 +43,15 @@ no answer, or not without an account:
 
 p50: median of five eth_blockNumber round trips from here. lag: blocks behind the highest head, read at one moment.
 logs: the widest range of blocks answered for one address and one event (tried 10, 50, 100, 1,000, 10,000).
-archive: an address's balance at block 1,000,000. browser: the answer carries access-control-allow-origin.
+archive: an address's balance at block 1,000,000. receipts: eth_getBlockReceipts for one block.
+browser: the answer carries access-control-allow-origin.
 ```
 
-twelve of twenty-one, at 13:52 utc on 10 september. every script i publish carries a fallback list
-of endpoints, and this is how that list gets made: tenderly, drpc and mevblocker answer a 10,000
-block log query and know old state; publicnode answers fastest but stops at 50 blocks of logs and
-keeps no archive; ankr wants an account now; cloudflare's and llamarpc's endpoints, still in a lot of
-tutorials, did not answer at all.
+fourteen of twenty-one at 14:21 utc on 10 september, twelve half an hour earlier: nownodes and merkle
+come and go. every script i publish carries a fallback list of endpoints, and this is how that list
+gets made: tenderly, drpc and mevblocker answer a 10,000 block log query and know old state;
+publicnode is among the fastest but stops at 50 blocks of logs and keeps no archive; ankr wants an
+account now; cloudflare's and llamarpc's endpoints, still in a lot of tutorials, did not answer at all.
 
 ## install
 
@@ -81,6 +82,7 @@ rpcprobe --summary-append data/daily.csv --quiet   # one row per endpoint per da
 | logs | `eth_getLogs` for the uniswap v3 factory's `PoolCreated`, 10 / 50 / 100 / 1,000 / 10,000 blocks | the event is rare, so a refusal is about the width of the range, never about the number of results |
 | archive | `eth_getBalance` of an address at block 1,000,000 | only an archive node still has that state |
 | batch | two calls in one request | fewer round trips for anything that reads many blocks |
+| receipts | `eth_getBlockReceipts` for one recent block | every receipt of a block in one call: [blobwatch](https://github.com/alinaschanz/blobwatch) `--receipts` lives on it |
 | fee hist | `eth_feeHistory` for 1,024 blocks, how many came back | [gasweek](https://github.com/alinaschanz/gasweek) pages through a week this way |
 | blob fee | `eth_blobBaseFee` | the fee for blob space, eip-4844 |
 | eth_config | `eth_config`, eip-7910 | the fork parameters, blob target and max included, straight from the node |
