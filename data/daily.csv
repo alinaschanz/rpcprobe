@@ -1,0 +1,22 @@
+date_utc,endpoint,url,ok,error,latency_ms,lag,logs_range,archive,batch,fee_history,blob_base_fee,eth_config,browser,client,block_receipts
+2026-09-11,1rpc,https://1rpc.io/eth,1,,54,0,10,0,1,1024,1,1,1,reth 2.5.1,0
+2026-09-11,ankr,https://rpc.ankr.com/eth,0,Unauthorized: You must authenticate your request with an API key.,,,0,0,0,0,0,0,1,,0
+2026-09-11,blastapi,https://eth-mainnet.public.blastapi.io,1,,43,0,10,1,1,1024,0,0,1,reth 2.4.0,0
+2026-09-11,blockpi,https://ethereum.blockpi.network/v1/rpc/public,0,http 521,,,0,0,0,0,0,0,0,,0
+2026-09-11,blockrazor,https://eth.blockrazor.xyz,1,,70,0,10,0,1,1024,1,1,1,geth 1.17.5,1
+2026-09-11,cloudflare,https://cloudflare-eth.com,0,Cannot fulfill request,,,0,0,0,0,0,0,1,,0
+2026-09-11,drpc,https://eth.drpc.org,1,,46,0,100,1,1,1024,0,0,1,geth 10.0.0,1
+2026-09-11,flashbots,https://rpc.flashbots.net,1,,59,0,10000,0,1,1024,1,0,1,reth 1.11.2,1
+2026-09-11,gatewayfm,https://rpc.eth.gateway.fm,0,http 503,,,0,0,0,0,0,0,1,,0
+2026-09-11,llamarpc,https://eth.llamarpc.com,0,http 525,,,0,0,0,0,0,0,0,,0
+2026-09-11,meowrpc,https://eth.meowrpc.com,0,http 429,,,0,0,0,0,0,0,1,,0
+2026-09-11,merkle,https://eth.merkle.io,1,,36,,0,0,0,0,0,0,1,,0
+2026-09-11,mevblocker,https://rpc.mevblocker.io,1,,236,0,10000,1,1,1024,1,0,1,mevblocker,1
+2026-09-11,nodies,https://eth-pokt.nodies.app,1,,42,0,50,1,1,1024,1,1,1,reth 2.5.2,1
+2026-09-11,nownodes,https://public-eth.nownodes.io,1,,125,0,0,0,1,1024,1,1,1,geth 1.17.5,1
+2026-09-11,omniatech,https://endpoints.omniatech.io/v1/eth/mainnet/public,0,http 521,,,0,0,0,0,0,0,0,,0
+2026-09-11,onfinality,https://eth.api.onfinality.io/public,0,http 429,,,0,0,0,0,0,0,1,,0
+2026-09-11,publicnode,https://ethereum-rpc.publicnode.com,1,,28,0,1000,0,1,1024,1,1,1,reth 2.5.1,1
+2026-09-11,tenderly,https://gateway.tenderly.co/public/mainnet,1,,35,0,10000,0,1,1024,0,0,1,tenderly 1.0,1
+2026-09-11,tenderly-gw,https://mainnet.gateway.tenderly.co,1,,36,0,10000,1,0,0,0,0,1,,1
+2026-09-11,zan,https://api.zan.top/eth-mainnet,1,,1092,0,0,0,1,1024,1,0,1,reth 2.5.1,0
