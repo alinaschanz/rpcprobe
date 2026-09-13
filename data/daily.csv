@@ -41,3 +41,24 @@ date_utc,endpoint,url,ok,error,latency_ms,lag,logs_range,archive,batch,fee_histo
 2026-09-12,tenderly,https://gateway.tenderly.co/public/mainnet,1,,208,0,10000,1,1,1024,1,0,1,tenderly 1.0,1
 2026-09-12,tenderly-gw,https://mainnet.gateway.tenderly.co,1,,187,0,10000,1,1,1024,1,0,1,tenderly 1.0,1
 2026-09-12,zan,https://api.zan.top/eth-mainnet,1,,810,0,0,0,1,1024,1,0,1,geth 1.17.3,0
+2026-09-13,1rpc,https://1rpc.io/eth,1,,152,1,10,0,1,1,1,1,1,geth 1.16.7,0
+2026-09-13,ankr,https://rpc.ankr.com/eth,0,Unauthorized: You must authenticate your request with an API key.,,,0,0,0,0,0,0,1,,0
+2026-09-13,blastapi,https://eth-mainnet.public.blastapi.io,1,,106,0,10,1,1,1024,0,0,1,reth 2.4.0,0
+2026-09-13,blockpi,https://ethereum.blockpi.network/v1/rpc/public,0,http 521,,,0,0,0,0,0,0,0,,0
+2026-09-13,blockrazor,https://eth.blockrazor.xyz,1,,75,0,10,0,1,1024,1,1,1,geth 1.17.5,1
+2026-09-13,cloudflare,https://cloudflare-eth.com,0,Cannot fulfill request,,,0,0,0,0,0,0,1,,0
+2026-09-13,drpc,https://eth.drpc.org,1,,56,0,100,1,1,1024,0,0,1,geth 10.0.0,1
+2026-09-13,flashbots,https://rpc.flashbots.net,1,,131,0,10000,0,1,1024,1,0,1,reth 1.11.2,1
+2026-09-13,gatewayfm,https://rpc.eth.gateway.fm,0,http 503,,,0,0,0,0,0,0,1,,0
+2026-09-13,llamarpc,https://eth.llamarpc.com,0,http 525,,,0,0,0,0,0,0,0,,0
+2026-09-13,meowrpc,https://eth.meowrpc.com,1,,271,0,0,0,0,1024,0,0,1,,0
+2026-09-13,merkle,https://eth.merkle.io,1,,96,,0,0,0,0,0,0,1,,0
+2026-09-13,mevblocker,https://rpc.mevblocker.io,1,,276,0,10000,1,1,1024,1,0,1,mevblocker,1
+2026-09-13,nodies,https://eth-pokt.nodies.app,1,,85,0,50,1,1,1024,1,1,1,reth 2.5.2,1
+2026-09-13,nownodes,https://public-eth.nownodes.io,1,,181,1,10000,0,1,1024,1,1,1,geth 1.17.5,0
+2026-09-13,omniatech,https://endpoints.omniatech.io/v1/eth/mainnet/public,0,http 521,,,0,0,0,0,0,0,0,,0
+2026-09-13,onfinality,https://eth.api.onfinality.io/public,0,http 429,,,0,0,0,0,0,0,1,,0
+2026-09-13,publicnode,https://ethereum-rpc.publicnode.com,1,,99,0,1000,0,1,1024,1,1,1,reth 2.5.1,1
+2026-09-13,tenderly,https://gateway.tenderly.co/public/mainnet,1,,214,0,10000,1,1,1024,1,0,1,tenderly 1.0,1
+2026-09-13,tenderly-gw,https://mainnet.gateway.tenderly.co,1,,192,0,10000,1,1,1024,1,0,1,tenderly 1.0,1
+2026-09-13,zan,https://api.zan.top/eth-mainnet,1,,910,0,0,0,1,1024,1,0,1,reth 2.5.1,0
